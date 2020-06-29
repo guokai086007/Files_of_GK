@@ -1,0 +1,70 @@
+SELECT
+	FEntryID as pk_recitem, --子表主键
+  FInterID as pk_recbill, --主表主键
+  'ys' as billclass, 
+  convert(varchar(19),current_timestamp,120) as billdate,
+  convert(varchar(19),current_timestamp,120) as busidate,
+  1 as buysellflag,
+  1.00000000 as caltaxmny,
+  0 as coordflag,
+  'c0200000004' as customer,
+  null as def1,
+  null as def2,
+  null as def3,
+  null as def4,
+  Fnumber as def5, --使用自定义项5记录原表中的产品名称
+  FUnitID as def6,-- 使用自定义项6记录原表中的单位
+  FBatchNo as def7,-- 使用自定义项7记录原表中的批号
+  FQty as def8, -- 使用自定义项8记录原表中的数量
+  FTaxAmount as def9, -- 使用自定义项9记录原表中的税额
+  FAmount as def10,-- 使用自定义项10记录原表中的金额
+  Fstdamount as def11,-- 使用自定义项11记录原表中的价税合计
+  FEntryID as def12,-- 使用自定义项12记录原表中的子表主键
+  FInterID as def13,-- 使用自定义项13记录原表中的主表主键
+  FPrice as def14, --单价
+  Fauxprice as def15, --含税单价
+  FTaxRate as def16, --税率
+  null as def17,   
+	null as def18,
+  null as def19, 
+  null as def20,
+  null as def21, 
+  null as def22,
+  null as def23, 
+	null as def24,
+  null as def25, 
+  null as def26,
+  null as def27,
+	null as def28,
+  null as def29, 
+  null as def30,
+  0 as direction,
+  null as scomment,
+  FAmount as local_money_bal, --组织本币余额
+  FAmount as local_money_de,--组织本币金额(借方)
+  FAmount as local_notax_de,--组织本币无税金额(借方)
+  FAmount as money_bal, --原币余额
+  FAmount as money_de, --借方原币金额
+  1.00000000 as notax_de,--借方原币无税金额
+  0 as objtype,
+  'F0' as pk_billtype,
+  'CNY' as pk_currtype,
+  '0402' as pk_deptid,
+  '04' as pk_fiorg,
+  'TDWL' as pk_group,
+  '04' as pk_org,
+  '0402003' as pk_psndoc,
+  null as pk_subjcode,
+  'D0' as pk_tradetype,
+   FPrice as price, --单价
+   1.00000000 as quantity_bal, --数量余额
+   1.00000000 as quantity_de, --借方数量
+   1.00000000 as rate, -- 组织本币汇率
+   0 as rowno,
+   0 as rowtype,
+   '04' as sett_org,
+   Fauxprice as taxprice,--含税单价
+   FTaxRate as taxrate,--税率
+   0 as taxtype--扣税类别
+FROM
+  SalInvBillEntry

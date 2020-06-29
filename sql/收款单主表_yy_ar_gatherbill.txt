@@ -1,0 +1,66 @@
+SELECT
+  FInterID as pk_gatherbill,
+  0 as accessorynum,
+  'sk' as billclass,
+  convert(varchar(19),current_timestamp,120) as billdate,
+  'yy' as billmaker,
+  1 as billstatus,
+  0 as coordflag,
+  convert(varchar(19),FDate,120) as creationtime,
+  'yy' as creator,
+  null as def1,
+	'1001A110000000000LY7' as def2,
+	null as def3,
+	null as def4,
+	FInterID as def5, -- 用自定义项5再次保存一下原收款单据的主键 FInterID
+	FBillNo as def6, -- 用自定义项6保存一下原收款单据的单据编码 FBillNo
+	FPOStyle as def7,-- 用自定义项7保存一下原收款单据的结算方式 FPOStyle
+	FCustID as def8, -- 用自定义项8保存一下原收款单据的客户 FCustID
+	FTypeID as def9, -- 用自定义项9保存一下原收款单据的单据类型 FTypeID
+  FExchangeRate as def10, -- 用自定义项10保存一下原收款单据的汇率 FExchangeRate
+	FDeptID as def11, -- 用自定义项10保存一下原收款单据的部门 FDeptID
+	FEmpID as def12, -- 用自定义项11保存一下原收款单据的业务员 FEmpID
+	FBillState as def13, -- 用自定义项12保存一下原收款单据的单据状态 FBillState
+	FBillerID as def14, -- 用自定义项13保存一下原收款单据的制单人 FBillerID
+	FCheckerId as def15, -- 用自定义项14保存一下原收款单据的审核人 FCheckerId
+	FCheckeDate as def16,-- 用自定义项15保存一下原收款单据的审核日期 FCheckeDate
+	FAmount as def17,-- 原币金额
+	null as def18,
+	null as def19,
+  null as def20,
+  null as def21,
+  null as def22,
+  null as def23,
+  null as def24,
+  null as def25,
+  null as def26,
+  null as def27,
+  null as def28,
+  null as def29,
+  null as def30,
+  null as effectdate,
+  10 as effectstatus,
+  'N' as isflowbill,
+  'N' as isforce,
+  'N' as isinit,
+  'N' as ismandatepay,
+  'N' as isnetpayready,
+  'N' as isonlinepay,
+  'N' as isreded,
+  1.00000000 as local_money,
+  FAmount as money, -- 原币金额
+  null as paydate,
+  'F2' as pk_billtype,
+  'CNY' as pk_currtype,
+  '04' as pk_fiorg,
+  'TDWL' as pk_group,
+  '04' as pk_org,
+  'D2' as pk_tradetype,
+  null as scomment,
+  '04' as sett_org,
+  0 as settleflag,
+  0 as settletype,
+  0 as src_syscode,
+  0 as syscode
+FROM
+  ARBill where   ARBill.InterfaceDataStatus!='成功' or InterfaceDataStatus is null

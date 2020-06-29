@@ -1,0 +1,65 @@
+SELECT
+	FInterID as pk_recbill,
+  0 as accessorynum,
+  null as approvedate,
+	'yy' as approver,
+	1 as approvestatus,
+  'ys' as billclass,
+  convert(varchar(19),current_timestamp,120) as billdate,
+  'yy' as billmaker,
+  1 as billstatus,
+  convert(varchar(19),FDate,120) as creationtime,
+  'yy' as creator,
+  null as def1,
+  '1001A110000000000LY7' as def2,-- 自定义项2要求显示项目档案，因为是参照类型的所以直接传主键(仓储业务部仓储项目)
+  null as def3,
+	null as def4,
+	FInterID as def5, -- 用自定义项5在保存一下原应收单的主键
+  FBillNo as def6, -- 用自定义项6保存一下原单据的单据编码，因为NCC中都是自己生成的。
+  convert(varchar(19),FKFDate,120) as def7, -- 用自定义项7保存一下原单据的业务日期
+	FPOStyle as def8, -- 用自定义项8保存一下原单据的销售方式
+	FCustID as def9, -- 用自定义项9保存一下原单据的客户
+	FExchangeRate as def10, -- 用自定义项10保存一下原单据的汇率
+	FDeptID as def11, --用自定义项11保存原单据的部门
+  FEmpID as def12, -- 用自定义项12保存原单据的业务员
+	FBillState as def13, -- 用自定义项13保存原单据的单据状态
+  FBillerID as def14, -- 用自定义项14保存原单据的制单人
+  FCheckerId as def15,-- 用自定义项15保存原单据的审批人
+  null as def16,
+  null as def17,
+  null as def18,
+  null as def19,
+	null as def20,
+	null as def21,
+	null as def22,
+	null as def23,
+	null as def24,
+	null as def25,
+	null as def26,
+	null as def27,
+	null as def28,
+	null as def29,
+	null as def30,
+  null as effectdate,
+  10 as effectstatus,
+  null as effectuser,
+	convert(varchar(19),FDate,120) as inner_effect_date,
+  'N' as isflowbill,
+  'N' as isinit,
+  'N' as isreded,
+  null as modifiedtime,
+  null as modifier,
+  'F0' as pk_billtype,
+  'CNY' as pk_currtype,
+  '04' as pk_fiorg,
+  'TDWL' as pk_group,
+  '04' as pk_org,
+  'D0' as pk_tradetype,
+  null as scomment,
+  'CN' as sendcountryid,
+  '04' as sett_org,
+  0 as src_syscode,
+  0 as syscode,
+  'CN' as taxcountryid
+FROM
+  SalInvBill where SalInvBill.InterfaceDataStatus!='成功' or InterfaceDataStatus is null

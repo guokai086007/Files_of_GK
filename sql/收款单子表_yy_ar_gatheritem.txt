@@ -1,0 +1,72 @@
+SELECT
+  FEntryID as pk_gatheritem, --子表主键
+  FInterID as pk_gatherbill, --主表主键
+	'0000RU' as bankrelated_code,
+	'sk' as billclass,
+  convert(varchar(19),current_timestamp,120) as billdate,
+  convert(varchar(19),current_timestamp,120) as busidate,
+  0 as coordflag,
+  'c0200000004' as customer,
+  null as def1,
+	null as def2,
+	null as def3,
+	FEntryID as def4,-- 子表主键
+	FInterID as def5,--主表主键
+	Faccount as def6, -- Faccount 往来科目
+	FAmount as def7, -- FAmount 实收金额
+	FBillNo as def8, -- FBillNo 发票号码
+  Fnumber as def9, -- Fnumber 产品名称
+	null as def10,
+	null as def11,
+	null as def12,
+	null as def13,
+	null as def14,
+	null as def15,
+	null as def16,
+	null as def17,
+	null as def18,
+	null as def19,
+	null as def20,
+	null as def21,
+  null as def22,
+  null as def23,
+  null as def24,
+  null as def25,
+  null as def26,
+  null as def27,
+  null as def28,
+  null as def29,
+  null as def30,
+	0 as direction,
+  FBillNo as invoiceno,
+  1.00000000 as local_money_bal,-- 组织本币余额
+	FAmount as local_money_cr,-- 组织本币金额(贷方)
+  1.00000000 as local_notax_cr,-- 组织本币无税金额(贷方)
+  0.00000000 as local_tax_cr,-- 税额
+  1.00000000 as money_bal,-- 原币余额
+  FAmount as money_cr,--贷方原币金额
+  1.00000000 as notax_cr, --贷方原币无税金额
+  0 as objtype,
+  0.00000000 as occupationmny, --预占用原币余额
+  'N' as pausetransact,
+  convert(varchar(19),current_timestamp,120) as paydate,
+  'F2' as pk_billtype,
+  'CNY' as pk_currtype,
+  '0401' as pk_deptid,
+  '04' as pk_fiorg,
+  'TDWL' as pk_group,
+  '04' as pk_org,
+  '0401003' as pk_psndoc,
+  'D2' as pk_tradetype,
+  0 as prepay,
+  0.00000000 as quantity_bal,
+  1.00000000 as rate,
+  0 as rowno,
+  0 as rowtype,
+  null as scomment,
+  '04' as sett_org,
+  's0200000003' as supplier,
+  0.00000000 as taxprice,
+  0.00000000 as taxrate
+FROM
+  ARBillEntry
