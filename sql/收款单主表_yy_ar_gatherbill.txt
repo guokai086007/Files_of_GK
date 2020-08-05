@@ -9,7 +9,7 @@ SELECT
   convert(varchar(19),FDate,120) as creationtime,
   'yy' as creator,
   null as def1,
-	'1001A110000000000LY7' as def2,
+	null as def2,
 	null as def3,
 	null as def4,
 	FInterID as def5, -- 用自定义项5再次保存一下原收款单据的主键 FInterID
@@ -19,7 +19,7 @@ SELECT
 	FTypeID as def9, -- 用自定义项9保存一下原收款单据的单据类型 FTypeID
   FExchangeRate as def10, -- 用自定义项10保存一下原收款单据的汇率 FExchangeRate
 	FDeptID as def11, -- 用自定义项10保存一下原收款单据的部门 FDeptID
-	FEmpID as def12, -- 用自定义项11保存一下原收款单据的业务员 FEmpID
+	'1001A110000000000LY7'as def12,
 	FBillState as def13, -- 用自定义项12保存一下原收款单据的单据状态 FBillState
 	FBillerID as def14, -- 用自定义项13保存一下原收款单据的制单人 FBillerID
 	FCheckerId as def15, -- 用自定义项14保存一下原收款单据的审核人 FCheckerId
@@ -61,6 +61,7 @@ SELECT
   0 as settleflag,
   0 as settletype,
   0 as src_syscode,
-  0 as syscode
+  0 as syscode,
+ '15000081282267' as recaccount 
 FROM
-  ARBill where   ARBill.InterfaceDataStatus!='成功' or InterfaceDataStatus is null
+  ARBill where   ARBill.InterfaceDataStatus!='成功' or InterfaceDataStatus is null and ARBill.FDate>'2020-08-01 00:00:00'

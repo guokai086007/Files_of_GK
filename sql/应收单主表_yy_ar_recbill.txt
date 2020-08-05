@@ -11,7 +11,7 @@ SELECT
   convert(varchar(19),FDate,120) as creationtime,
   'yy' as creator,
   null as def1,
-  '1001A110000000000LY7' as def2,-- 自定义项2要求显示项目档案，因为是参照类型的所以直接传主键(仓储业务部仓储项目)
+  null as def2,-- 自定义项2要求显示项目档案，因为是参照类型的所以直接传主键(仓储业务部仓储项目)
   null as def3,
 	null as def4,
 	FInterID as def5, -- 用自定义项5在保存一下原应收单的主键
@@ -21,11 +21,11 @@ SELECT
 	FCustID as def9, -- 用自定义项9保存一下原单据的客户
 	FExchangeRate as def10, -- 用自定义项10保存一下原单据的汇率
 	FDeptID as def11, --用自定义项11保存原单据的部门
-  FEmpID as def12, -- 用自定义项12保存原单据的业务员
+  '1001A110000000000LY7' as def12,  -- 自定义项12要求显示项目档案，因为是参照类型的所以直接传主键(仓储业务部仓储项目)
 	FBillState as def13, -- 用自定义项13保存原单据的单据状态
   FBillerID as def14, -- 用自定义项14保存原单据的制单人
   FCheckerId as def15,-- 用自定义项15保存原单据的审批人
-  null as def16,
+  FEmpID as def16, --业务员
   null as def17,
   null as def18,
   null as def19,
@@ -54,7 +54,10 @@ SELECT
   '04' as pk_fiorg,
   'TDWL' as pk_group,
   '04' as pk_org,
-  'D0' as pk_tradetype,
+	case FPOStyle
+		when '1' then 'F0-Cxx-01'
+		when '2' then 'F0-Cxx-02'
+    end pk_tradetype,
   null as scomment,
   'CN' as sendcountryid,
   '04' as sett_org,

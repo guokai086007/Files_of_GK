@@ -6,7 +6,7 @@ SELECT
   convert(varchar(19),current_timestamp,120) as billdate,
   convert(varchar(19),current_timestamp,120) as busidate,
   0 as coordflag,
-  'c0200000004' as customer,
+  'c0102000002' as customer,
   null as def1,
 	null as def2,
 	null as def3,
@@ -49,14 +49,14 @@ SELECT
   0 as objtype,
   0.00000000 as occupationmny, --预占用原币余额
   'N' as pausetransact,
-  convert(varchar(19),current_timestamp,120) as paydate,
+  null as paydate,
   'F2' as pk_billtype,
   'CNY' as pk_currtype,
-  '0401' as pk_deptid,
+  '0406' as pk_deptid,
   '04' as pk_fiorg,
   'TDWL' as pk_group,
   '04' as pk_org,
-  '0401003' as pk_psndoc,
+  '0406023' as pk_psndoc,
   'D2' as pk_tradetype,
   0 as prepay,
   0.00000000 as quantity_bal,
@@ -65,8 +65,9 @@ SELECT
   0 as rowtype,
   null as scomment,
   '04' as sett_org,
-  's0200000003' as supplier,
+  'c0200000007' as supplier,
   0.00000000 as taxprice,
-  0.00000000 as taxrate
+  0.00000000 as taxrate,
+  '15000081282267' as recaccount 
 FROM
   ARBillEntry
