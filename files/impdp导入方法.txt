@@ -1,0 +1,28 @@
+//1. 创建一个存放数据泵文件的路径
+CREATE OR REPLACE DIRECTORY DMPDIR AS  'G:\a\'; 
+
+//2. 将存放数据泵文件的目录的读写权限赋予要导入数据的用户
+grant read,write on directory DMPDIR to (要导入数据的Oracle用户);
+
+//3. 使用impdp命令为用户导入数据，导入时指定数据泵文件所在的目录名称DIRECTORY=*****
+impdp nc65gl/nc65gl DIRECTORY=DMPDIR DUMPFILE=NC65GL.dmp full=y
+
+//数据泵文件中的用户名和密码与本地不一样要加上  remap_schema=sw0413:sw0521  参数
+Impdp sw0521/sw0521 directory=DATA_PUMP_DIR DUMPFILE=SW0413.DMP full=y remap_schema=sw0413:sw0521
+
+
+
+
+
+CREATE USER SC65 IDENTIFIED BY SC65 DEFAULT TABLESPACE NNC_DATA01 TEMPORARY TABLESPACE temp;
+GRANT connect,dba to SC65;
+
+imp SC65/SC65 file=D:\dir_arapdmp\nc65.dmp log=D:\dir_arapdmp\nc65sc.log full=y
+
+
+
+----------------------------
+查询Oracle实例语句:  select instance_name from v$instance;
+
+
+
