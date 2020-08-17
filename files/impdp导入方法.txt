@@ -23,6 +23,45 @@ imp SC65/SC65 file=D:\dir_arapdmp\nc65.dmp log=D:\dir_arapdmp\nc65sc.log full=y
 
 ----------------------------
 查询Oracle实例语句:  select instance_name from v$instance;
+------------------------------
+--创建两个表空间
+CREATE BIGFILE TABLESPACE NNC_DATA03 DATAFILE 'G:\NCDATA\nnc_data03.dbf' SIZE 500M AUTOEXTEND ON NEXT 50M EXTENT MANAGEMENT LOCAL UNIFORM SIZE 1m ;
+CREATE BIGFILE TABLESPACE NNC_INDEX03 DATAFILE 'G:\NCDATA\nnc_index03.dbf' SIZE 500M AUTOEXTEND ON NEXT 50M EXTENT MANAGEMENT LOCAL UNIFORM SIZE 128K ;
+--创建一个用户
+CREATE USER ncc1909 IDENTIFIED BY ncc1909 DEFAULT TABLESPACE NNC_DATA03 TEMPORARY TABLESPACE temp;
+--授予用户权限
+GRANT connect,dba to ncc1909;
+========================================================================================================================
+二、 准备过程（以下步骤在源数据库和目标数据库上均需要执行,第一次执行即可，以后不需要重复执行，如不确认是否已做相关设置，可直接执行第3步查看）
+
+创建数据库物理存放路径，例如d:\dbbak
+
+（以下3步操作都是）创建逻辑目录，指向上面所建物理路径。dpdata1为我们定义的逻辑目录名。
+
+SQL>create directory dpdata1 as 'd:\dbbak';
+
+验证上述步骤操作是否成功(注意：此处只是验证是否成功创建逻辑路径，并不会检查对应的物理路径是否真实有效)
+
+SQL>select * from dba_directories;
+
+以管理员身份赋予sbnetdba用户赋予在指定目录的操作权限，如果有多个用户，请对用户授权。
+
+SQL>grant read,write on directory dpdata1 to sbnetdba;
+
+ 
+
+三、 导出数据（注意下面命令不是在SQL下执行，而是直接在CMD命令行中执行）
+
+l 按用户导数据，如果有多个用户，按每个用户分别执行备份。
+
+expdp sbnetdba/passwd@netdb schemas=sbnetdba dumpfile=expdp.dmp DIRECTORY=dpdata1
+
+——schemas：需要进行导出的用户身份
+
+——dumpfile：导出的文件名
+
+——导出完成后，会生产export.log日志文件，记录导出信息，如有疑问可用来分析。
+
 
 
 
